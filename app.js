@@ -5,6 +5,11 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 const app = express()
 
+// Configure CORS before defining routes
+app.use(cors({
+    origin: `${process.env.BASE_URL}`,
+}))
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
@@ -13,9 +18,5 @@ import todo from './routes/todo.js'
 
 app.use('/user', user)
 app.use('/todo', todo)
-
-app.use(cors({
-    origin: `${process.env.BASE_URL}`,
-}))
 
 export default app
